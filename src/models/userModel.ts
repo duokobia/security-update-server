@@ -1,38 +1,27 @@
-export interface User {
-  id: number;
+import mongoose, { Document, Schema } from "mongoose";
+
+export interface IUser extends Document {
   email: string;
   password: string;
   name: string;
-  role: 'user' | 'analyst'| 'admin';
+  role: "user" | "analyst" | "admin";
   createdAt: Date;
   updatedAt: Date;
   lastLogin?: Date;
 }
 
-let users: User[] = [];
-let idCounter = 1;
+const userSchema = new Schema<IUser>(
+  {
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    name: { type: String, required: true },
+    role: { type: String, enum: ["user", "analyst", "admin"], default: "user" },
+    lastLogin: { type: Date },
+  },
+  {
+    timestamps: true,
+  },
+);
 
-export const createUser = (name: string, email: string): User => {
-  const now = new Date();
-
-  const newUser: User = {
-    id: idCounter++,
-    name,
-    email,
-    password: "",
-    role: "user",
-    createdAt: now,
-    updatedAt: now,
-    lastLogin: undefined,
-  };
-  users.push(newUser);
-  return newUser;
-};
-
-export const getAllUsers = (): User[] => {
-  return users;
-};
-
-export const getUserById = (id: number): User | undefined => {
-  return users.find(user => user.id === id);
-};
+const User = mongoose.model<IUser>("User", userSchema);
+export default User;
