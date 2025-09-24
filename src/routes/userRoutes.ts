@@ -6,12 +6,15 @@ import {
   handleLoginUser,
 } from "../controllers/userController";
 
+import { authenticateJWT } from "../middleware/auth";
+
 const router = express.Router();
 
-
-router.get("/user", handleGetUsers);
-router.get("/user/:id", handleGetUserById);
 router.post("/register", handleCreateUser);
 router.post("/login", handleLoginUser);
+
+// Protect all routes below with JWT middleware
+router.get("/user", authenticateJWT, handleGetUsers);
+router.get("/user/:id", authenticateJWT, handleGetUserById);
 
 export default router;

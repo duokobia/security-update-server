@@ -1,8 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import jwt, { SignOptions } from "jsonwebtoken";
+import dotenv from "dotenv";
 import { Request, Response } from "express";
 import User from "../models/userModel";
 import bcrypt from "bcrypt";
+
+dotenv.config();
+
+const JWT_SECRET: string = process.env.JWT_SECRET!;
+const JWT_EXPIRES_IN: string | number | undefined = process.env.JWT_EXPIRES_IN || "1h";
 
 export const handleLoginUser = async (req: Request, res: Response) => {
   try {
@@ -29,9 +36,19 @@ export const handleLoginUser = async (req: Request, res: Response) => {
     user.lastLogin = new Date();
     await user.save();
 
-    // Return safe user data
+    // Create JWT payload
+    const payload = {
+      userId: user._id,
+      role: user.role,
+    };
+
+    // Sign JWT token
+    const options: SignOptions = { expiresIn: JWT_EXPIRES_IN as jwt.SignOptions['expiresIn'] };
+const token = jwt.sign(payload, JWT_SECRET, options);
+
+    // Return safe user data + token
     const { password: _, ...safeUser } = user.toObject();
-    res.status(200).json(safeUser);
+    res.status(200).json({ user: safeUser, token });
   } catch (err) {
     res.status(500).json({ message: "Failed to login.", error: err });
   }
