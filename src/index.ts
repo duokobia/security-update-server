@@ -27,6 +27,6 @@ app.use("/api/v1/conflicts", conflictRoutes);
 // Connect to DB and start server
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
   });
 });
