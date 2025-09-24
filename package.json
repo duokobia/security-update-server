@@ -5,6 +5,7 @@
   "main": "dist/index.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "seed": "ts-node scripts/seedConflictData.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint .",
@@ -33,6 +34,7 @@
     "globals": "^16.4.0",
     "jiti": "^2.6.0",
     "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.44.1"
