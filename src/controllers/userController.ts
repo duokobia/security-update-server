@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
 import User from "../models/userModel";
+import bcrypt from "bcrypt";
 
 export const handleCreateUser = async (req: Request, res: Response) => {
   try {
@@ -18,10 +19,14 @@ export const handleCreateUser = async (req: Request, res: Response) => {
       return res.status(409).json({ message: "Email already in use." });
     }
 
+    // Hash password before saving
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const newUser = await User.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     // Don't send password back
