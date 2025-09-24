@@ -10,11 +10,18 @@ import { authenticateJWT } from "../middleware/auth";
 
 const router = express.Router();
 
+// POST /api/v1/auth/user/register
 router.post("/register", handleCreateUser);
+
+// POST /api/v1/auth/user/login
 router.post("/login", handleLoginUser);
 
-// Protect all routes below with JWT middleware
-router.get("/user", authenticateJWT, handleGetUsers);
-router.get("/user/:id", authenticateJWT, handleGetUserById);
+
+// Protected routes
+// GET /api/v1/auth/user/
+router.get("/", authenticateJWT, handleGetUsers);
+
+// GET /api/v1/auth/user/:id
+router.get("/:id", authenticateJWT, handleGetUserById);
 
 export default router;

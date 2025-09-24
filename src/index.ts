@@ -12,11 +12,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Routes
-app.use("/", userRoutes);
-
 app.get("/", (req, res) => {
   res.send("Welcome to the Home Page!");
 });
+
+// Route: Namespaced user routes
+// All user routes will be accessible under: /api/v1/auth/user
+app.use("/api/v1/auth/user", userRoutes);
 
 // Connect to DB and start server
 connectDB().then(() => {
