@@ -4,6 +4,39 @@ import { Request, Response } from "express";
 import User from "../models/userModel";
 import bcrypt from "bcrypt";
 
+export const handleLoginUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required." });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Compare passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Optional: Update last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    // Return safe user data
+    const { password: _, ...safeUser } = user.toObject();
+    res.status(200).json(safeUser);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to login.", error: err });
+  }
+};
+
 export const handleCreateUser = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
