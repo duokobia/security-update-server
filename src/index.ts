@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 import { connectDB } from "./database/db";
 import dotenv from "dotenv";
 import usersRoutes from "./routes/usersRoutes";
@@ -7,10 +8,25 @@ import analyticsRoutes from "./routes/analyticsRoutes";
 import authRoutes from "./routes/authRoutes";
 import { setupSwagger } from "./swagger";
 
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Middleware: Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 10,
+  message: {
+    status: 429,
+    message: "Too many requests. Please try again later.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(limiter); // Apply globally
 
 // Middleware to parse JSON
 app.use(express.json());
