@@ -1,4 +1,5 @@
 import express from "express";
+import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import { connectDB } from "./database/db";
 import dotenv from "dotenv";
@@ -13,6 +14,9 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Apply Helmet BEFORE any routes or request handlers
+app.use(helmet());
 
 // Middleware: Rate limiting
 const limiter = rateLimit({
