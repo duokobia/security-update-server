@@ -12,7 +12,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/user/register:
+ * /auth/users/register:
  *   post:
  *     summary: Registers a new user
  *     tags: [Users]
@@ -48,7 +48,7 @@ router.post("/register", handleCreateUser);
 
 /**
  * @swagger
- * /auth/user/login:
+ * /auth/users/login:
  *   post:
  *     summary: Logs in a user and receive a JWT token
  *     tags: [Users]
@@ -91,7 +91,7 @@ router.post("/login", handleLoginUser);
 
 /**
  * @swagger
- * /auth/user/:
+ * /auth/users/:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -120,7 +120,7 @@ router.get("/", authenticateJWT, handleGetUsers);
 
 /**
  * @swagger
- * /auth/user/{id}:
+ * /auth/users/{id}:
  *   get:
  *     summary: Get a user by ID
  *     tags: [Users]
