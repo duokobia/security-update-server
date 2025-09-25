@@ -1,21 +1,21 @@
 
-# 🛡️ Security Update Server
+# Security Update Server
 
 A secure and modular RESTful API server built with **Node.js**, **Express**, **TypeScript**, **JWT authentication**, and documented using **Swagger**. It features comprehensive user authentication, real-time conflict data analytics, and full API documentation.
 
 
-## 🚀 Features
+## Features
 
-- ✅ User authentication (`register`, `login`, `logout`)
-- 🔐 JWT-based protected routes
-- 📊 Analytics and conflict data endpoints
-- 📁 Organized controller, route, and middleware structure
-- 📝 Swagger API documentation
-- 🌱 Environment variable support (`.env`)
-- 📦 MongoDB integration (via `connectDB`)
+- User authentication (`register`, `login`, `logout`)
+- JWT-based protected routes
+- Analytics and conflict data endpoints
+- Organized controller, route, and middleware structure
+- Swagger API documentation
+- Environment variable support (`.env`)
+- MongoDB integration (via `connectDB`)
 
 
-## 📦 Tech Stack
+## Tech Stack
 
 - **Node.js**
 - **Express**
@@ -26,7 +26,7 @@ A secure and modular RESTful API server built with **Node.js**, **Express**, **T
 - **dotenv**
 
 
-## 📁 Project Structure
+## Project Structure
 
 ```bash
 src/
@@ -41,24 +41,24 @@ src/
 ````
 
 
-## 🧪 API Endpoints Overview
+## API Endpoints Overview
 
-| Method | Endpoint                            | Auth Required | Description                  |
-| ------ | ----------------------------------- | ------------- | ---------------------------- |
-| POST   | `/api/v1/auth/users/register`       | ❌             | Register a new user          |
-| POST   | `/api/v1/auth/users/login`          | ❌             | Log in and receive JWT token |
-| POST   | `/api/v1/auth/users/logout`         | ✅             | Log out (client deletes JWT) |
-| GET    | `/api/v1/auth/users`                | ✅             | Get all users                |
-| GET    | `/api/v1/auth/users/:id`            | ✅             | Get user by ID               |
-| GET    | `/api/v1/analytics`                 | ✅             | Get analytics data           |
-| GET    | `/api/v1/conflicts`                 | ✅             | Get all conflict data        |
-| GET    | `/api/v1/conflicts/{region}`        | ✅             | Filter conflicts by region   |
-| GET    | `/api/v1/conflicts/data/bar`        | ✅             | Get bar chart data           |
-| GET    | `/api/v1/conflicts/data/timeseries` | ✅             | Get timeseries data          |
+| Method | Endpoint                            |  Description                  |
+| ------ | ----------------------------------- |  ---------------------------- |
+| POST   | `/api/v1/auth/users/register`       |  Register a new user          |
+| POST   | `/api/v1/auth/users/login`          |  Log in and receive JWT token |
+| POST   | `/api/v1/auth/users/logout`         |  Log out (client deletes JWT) |
+| GET    | `/api/v1/auth/users`                |  Get all users                |
+| GET    | `/api/v1/auth/users/:id`            |  Get user by ID               |
+| GET    | `/api/v1/analytics`                 |  Get analytics data           |
+| GET    | `/api/v1/conflicts`                 |  Get all conflict data        |
+| GET    | `/api/v1/conflicts/{region}`        |  Filter conflicts by region   |
+| GET    | `/api/v1/conflicts/data/bar`        |  Get bar chart data           |
+| GET    | `/api/v1/conflicts/data/timeseries` |  Get timeseries data          |
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 This project uses **JWT (JSON Web Token)** for securing protected routes.
 
@@ -71,7 +71,7 @@ Authorization: Bearer <your-token-here>
 
 ---
 
-## 📚 Swagger Documentation
+## Swagger Documentation
 
 Swagger UI is available at:
 
@@ -83,7 +83,7 @@ It provides a complete, interactive API reference.
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -131,7 +131,7 @@ npm start
 
 ---
 
-## 🧪 Testing with Postman
+## Testing with Postman
 
 * Import the Swagger/OpenAPI spec from `http://localhost:3000/api-docs` (Postman supports this)
 * Or manually create requests using the endpoint list above
@@ -139,7 +139,7 @@ npm start
 
 ---
 
-## 📦 Scripts
+## Scripts
 
 | Command         | Description                   |
 | --------------- | ----------------------------- |
@@ -149,7 +149,7 @@ npm start
 
 ---
 
-## ✅ To-Do
+## To-Do
 
 * [ ] Add validation with Joi/Zod
 * [ ] Add role-based access control
@@ -164,7 +164,7 @@ npm start
 ---
 
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 * Express.js team for the fantastic web framework
 
