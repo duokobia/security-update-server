@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes";
 import conflictRoutes from "./routes/conflictRoutes";
 import analyticsRoutes from "./routes/analyticsRoutes";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ app.use("/api/v1/auth/user", userRoutes);
 // Add this route with a base path
 app.use("/api/v1/conflicts", conflictRoutes);
 app.use("/api/v1/analytics", analyticsRoutes);
+
+app.use("/api/v1/auth", authRoutes);
 
 // Connect to DB and start server
 connectDB().then(() => {
