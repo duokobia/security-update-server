@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.use(authenticateJWT);
 
-router.get("/analytics", getAnalytics);
+router.get("/", getAnalytics);
 
 export default router;
