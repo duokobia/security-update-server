@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRoutes";
 import conflictRoutes from "./routes/conflictRoutes";
 import analyticsRoutes from "./routes/analyticsRoutes";
 import authRoutes from "./routes/authRoutes";
+import { setupSwagger } from "./swagger";
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON
 app.use(express.json());
+
+// Swagger docs route
+setupSwagger(app);
 
 // Routes
 app.get("/", (req, res) => {
