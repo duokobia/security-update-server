@@ -1,6 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import cors from "cors";
 import { connectDB } from "./database/db";
 import dotenv from "dotenv";
 import usersRoutes from "./routes/usersRoutes";
@@ -14,6 +15,18 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// CORS configuration
+app.use(cors({
+  origin: [
+    "http://localhost:3000", // Next.js dev server
+    "http://localhost:3001", // Alternative Next.js port
+    "https://your-production-domain.com" // Your production domain
+  ],
+  credentials: true, // Allow cookies if needed
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+}));
 
 // Apply Helmet BEFORE any routes or request handlers
 app.use(helmet());
